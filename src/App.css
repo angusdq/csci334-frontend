@@ -1,0 +1,25 @@
+.selectUserRegisterStyle {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    color: 'black';
+  }
+
+.buttonRegisterPage{
+    margin: '10px'; 
+    color: 'red';
+}
+
+.back-arrow {
+    position: absolute;
+    top: 100;
+    left: 100;
+  }
+
+.signup-login{
+    position: absolute;
+    top: 100;
+    right: 100;
+}
