@@ -55,7 +55,7 @@ export default function LoginForm() {
           .then((json) => {
             console.log(json);
             localStorage.setItem('loggedin', true);
-            alert('fuck you yes man')
+            alert('Signed in')
           });
       };
 
