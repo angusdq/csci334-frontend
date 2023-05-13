@@ -15,15 +15,15 @@ export default function AuthorHomePage(){
     };
 
     const handleClickSystemAdmin = () => {
-        navigate('/systemadminhomepage');
+        navigate('/systemadminlogin');
     };
 
-    const handleClickReviewer = () => {
-        navigate('/reviewerhomepage');
+    const handleClickReviewer= () => {
+        navigate('/reviewerlogin');
     };
 
     const handleClickConference = () => {
-        navigate('/conferencehomepage');
+        navigate('/conferencelogin');
     };
 
     const handleClickSignOut = () => {
@@ -47,7 +47,7 @@ export default function AuthorHomePage(){
             </Drawer>
 
             <div class='selectUserRegisterStyle'>        
-                <p>Select User to Register</p>
+                <p>Author Home Page</p>
                 <Button class="buttonRegisterPage" variant="contained" onClick={handleClick} >Submit a Paper</Button>
                 <Button class="buttonRegisterPage" variant="contained" onClick={handleClick2} >View Papers</Button>
             </div>
