@@ -1,24 +1,22 @@
 import { React } from 'react';
 import '../../App.css'
-import { Button, Icon } from '@mui/material';
-import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import { Button } from '@mui/material';
 import { useNavigate } from "react-router-dom";
+
 
 
 export default function SelectUserSignUp() {
 
   const navigate = useNavigate();
 
-  const handleBackButtonClick = () => {
+  const handleSignUpButtonClick = () => {
     navigate('/');
   };
 
   return (
     <>
-      <div class="back-arrow">
-        <Icon>
-          <ArrowBackIosIcon fontSize="large" onClick={handleBackButtonClick}/>
-        </Icon>
+      <div class="signup-login">
+          <Button class="buttonRegisterPage" variant="contained" onClick={handleSignUpButtonClick}>Sign in</Button>
       </div>
 
       <div class='selectUserRegisterStyle'>        
