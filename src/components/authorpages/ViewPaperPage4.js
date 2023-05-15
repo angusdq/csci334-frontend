@@ -1,8 +1,7 @@
 import { React } from 'react';
 import '../../App.css'
-import { Button, TextField } from '@mui/material';
+import { Button } from '@mui/material';
 import { useNavigate } from "react-router-dom";
-import { useState, useEffect } from 'react';
 
 export default function ViewPaperPage4() {
     const navigate = useNavigate();

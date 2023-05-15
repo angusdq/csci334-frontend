@@ -1,6 +1,6 @@
 import { React } from 'react';
 import '../../App.css'
-import { Button, TextField } from '@mui/material';
+import { Button } from '@mui/material';
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from 'react';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
@@ -9,21 +9,34 @@ import { Icon } from '@mui/material';
 export default function ViewPaperPage1() {
 
     const navigate = useNavigate();
+    const [selectedPaper, setSelectedPaper] = useState('');
+    const [paperData, setPapers] = useState([]);
+    const paperIdArr = [];
 
     const handleClick = () => {
-      navigate('/submitpaperpage2');
+      navigate('/viewpaperpage2');
     };
 
     const handleBackButtonClick = () => {
         navigate('/authorhomepage');
       };
 
-    const [options, setOptions] = useState([]);
-    const [selectedOption, setSelectedOption] = useState(null);
+    useEffect(() => {
+        async function fetchUsers() {        
+          const response = await fetch('http://localhost:8080/papers');
+          const json = await response.json();
+          setPapers(json);
+        }
+        fetchUsers();
+      }, []);
 
-    function handleSelect(option) {
-        setSelectedOption(option);
-    }
+      paperData.forEach((obj) => {
+        paperIdArr.push(obj.id); 
+      });
+
+      function handleChangePaper(event) {
+        setSelectedPaper(event.target.value);
+      }
     
     return (
         <>
@@ -33,16 +46,17 @@ export default function ViewPaperPage1() {
                 </Icon>
             </div>
 
-            <div>
-                <select value={selectedOption} onChange={e => handleSelect(e.target.value)}>
-                <option value="">Select Paper</option>
-                {options.map(option => (
-                    <option key={option.id} value={option.id}>
-                    {option.label}
+            <div class="selectUserRegisterStyle">
+                <select value={selectedPaper} onChange={handleChangePaper}>
+                    <option value="">Select a Paper</option>
+                        {paperIdArr.map((option) => (
+                    <option key={option} value={option}>
+                        {option}
                     </option>
-                ))}
+                    ))}
                 </select>
+                <Button class="buttonRegisterPage" variant="contained" onClick={handleClick}>View Paper</Button>
             </div>
-        </>
+      </>
     )
 }

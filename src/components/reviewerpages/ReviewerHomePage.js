@@ -7,15 +7,15 @@ export default function ReviewerHomePage(){
     const navigate = useNavigate();
 
     const handleClick = () => {
-        navigate('/submitpaperpage1');
+        navigate('/bidpaperpage1');
     };
 
     const handleClick2 = () => {
-        navigate('/viewpaperpage1');
+        navigate('/reviewpaperpage1reviewer');
     };
 
     const handleClick3 = () => {
-        navigate('/viewpaperpage1');
+        navigate('/viewpaperpage1reviewer');
     };
 
     const handleClickSystemAdmin = () => {

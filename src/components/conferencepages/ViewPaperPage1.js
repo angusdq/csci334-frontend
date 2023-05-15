@@ -6,7 +6,7 @@ import { useState, useEffect } from 'react';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import { Icon } from '@mui/material';
 
-export default function ViewPaperPage1Reviewer() {
+export default function ViewPaperPage1Conference() {
 
     const navigate = useNavigate();
     const [selectedPaper, setSelectedPaper] = useState('');
@@ -14,11 +14,11 @@ export default function ViewPaperPage1Reviewer() {
     const paperIdArr = [];
 
     const handleClick = () => {
-      navigate('/viewpaperpage2reviewer');
+      navigate('/viewpaperpage2conference');
     };
 
     const handleBackButtonClick = () => {
-        navigate('/reviewerhomepage');
+        navigate('/conferencehomepage');
       };
 
     useEffect(() => {
@@ -47,7 +47,7 @@ export default function ViewPaperPage1Reviewer() {
             </div>
 
             <div class="selectUserRegisterStyle">
-              <p>Select the paper to review</p>
+              <p>Select the paper to see the ratings</p>
                 <select value={selectedPaper} onChange={handleChangePaper}>
                     <option value="">Select a Paper</option>
                         {paperIdArr.map((option) => (
@@ -56,7 +56,7 @@ export default function ViewPaperPage1Reviewer() {
                     </option>
                     ))}
                 </select>
-                <Button class="buttonRegisterPage" variant="contained" onClick={handleClick}>Review Paper</Button>
+                <Button class="buttonRegisterPage" variant="contained" onClick={handleClick}>View Paper</Button>
             </div>
       </>
     )

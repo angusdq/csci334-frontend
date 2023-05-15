@@ -3,16 +3,16 @@ import '../../App.css'
 import { Button } from '@mui/material';
 import { useNavigate } from "react-router-dom";
 
-export default function BidPaperPage2() {
+export default function ReviewPaperPage4Conference() {
     const navigate = useNavigate();
 
     const handleClick = () => {
-      navigate('/reviewerhomepage');
+      navigate('/conferencehomepage');
     };
     
     return (
         <div>
-            <h1>Your prefferences have been submitted</h1>
+            <h1>Your review has been submitted</h1>
             <Button class="buttonRegisterPage" variant="contained" onClick={handleClick} >Return home</Button>
         </div>
     )

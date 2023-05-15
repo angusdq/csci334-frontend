@@ -6,7 +6,7 @@ import { useState, useEffect } from 'react';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import { Icon } from '@mui/material';
 
-export default function ViewPaperPage1Reviewer() {
+export default function ViewPaperPage2Conference() {
 
     const navigate = useNavigate();
     const [selectedPaper, setSelectedPaper] = useState('');
@@ -14,11 +14,11 @@ export default function ViewPaperPage1Reviewer() {
     const paperIdArr = [];
 
     const handleClick = () => {
-      navigate('/viewpaperpage2reviewer');
+      navigate('/conferencehomepage');
     };
 
     const handleBackButtonClick = () => {
-        navigate('/reviewerhomepage');
+        navigate('/viewpaperpage1conference');
       };
 
     useEffect(() => {
@@ -31,7 +31,7 @@ export default function ViewPaperPage1Reviewer() {
       }, []);
 
       paperData.forEach((obj) => {
-        paperIdArr.push(obj.id); 
+        paperIdArr.push(obj.rating); 
       });
 
       function handleChangePaper(event) {
@@ -47,16 +47,16 @@ export default function ViewPaperPage1Reviewer() {
             </div>
 
             <div class="selectUserRegisterStyle">
-              <p>Select the paper to review</p>
+                <p>Papers ratings</p>
                 <select value={selectedPaper} onChange={handleChangePaper}>
-                    <option value="">Select a Paper</option>
+                    <option value="">Papers ratings</option>
                         {paperIdArr.map((option) => (
                     <option key={option} value={option}>
                         {option}
                     </option>
                     ))}
                 </select>
-                <Button class="buttonRegisterPage" variant="contained" onClick={handleClick}>Review Paper</Button>
+                <Button class="buttonRegisterPage" variant="contained" onClick={handleClick}>Return Home</Button>
             </div>
       </>
     )

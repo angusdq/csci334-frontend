@@ -7,15 +7,11 @@ export default function ConferenceHomePage(){
     const navigate = useNavigate();
 
     const handleClick = () => {
-        navigate('/submitpaperpage1');
+        navigate('/reviewpaperpage1conference');
     };
 
     const handleClick2 = () => {
-        navigate('/viewpaperpage1');
-    };
-
-    const handleClick3 = () => {
-        navigate('/viewpaperpage1');
+        navigate('/viewpaperpage1conference');
     };
 
     const handleClickSystemAdmin = () => {
@@ -52,9 +48,8 @@ export default function ConferenceHomePage(){
 
             <div class='selectUserRegisterStyle'>        
                 <p>Conference Home Page</p>
-                <Button class="buttonRegisterPage" variant="contained" onClick={handleClick} >Bid on a Paper</Button>
-                <Button class="buttonRegisterPage" variant="contained" onClick={handleClick2} >Review Papers</Button>
-                <Button class="buttonRegisterPage" variant="contained" onClick={handleClick3} >View Papers</Button>
+                <Button class="buttonRegisterPage" variant="contained" onClick={handleClick} >Review Paper</Button>
+                <Button class="buttonRegisterPage" variant="contained" onClick={handleClick2} >View Papers</Button>
             </div>
         </>  
     )
