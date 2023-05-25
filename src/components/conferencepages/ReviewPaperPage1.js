@@ -6,6 +6,8 @@ import { useState, useEffect } from 'react';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import { Icon } from '@mui/material';
 
+export let selectedPaperId = ''
+
 export default function ReviewPaperPage1Conference() {
 
     const navigate = useNavigate();
@@ -14,6 +16,8 @@ export default function ReviewPaperPage1Conference() {
     const paperIdArr = [];
 
     const handleClick = () => {
+      console.log(selectedPaper, "selected paper")
+      selectedPaperId = selectedPaper;
       navigate('/reviewpaperpage2conference');
     };
 

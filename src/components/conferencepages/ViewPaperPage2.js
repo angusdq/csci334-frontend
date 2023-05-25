@@ -5,13 +5,13 @@ import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from 'react';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import { Icon } from '@mui/material';
+import { selectedPaperId } from './ViewPaperPage1';
 
 export default function ViewPaperPage2Conference() {
 
     const navigate = useNavigate();
     const [selectedPaper, setSelectedPaper] = useState('');
     const [paperData, setPapers] = useState([]);
-    const paperIdArr = [];
 
     const handleClick = () => {
       navigate('/conferencehomepage');
@@ -21,18 +21,15 @@ export default function ViewPaperPage2Conference() {
         navigate('/viewpaperpage1conference');
       };
 
-    useEffect(() => {
+      useEffect(() => {
         async function fetchUsers() {        
-          const response = await fetch('http://localhost:8080/papers');
+          const response = await fetch(`http://localhost:8080/paper/${selectedPaperId}`);
           const json = await response.json();
           setPapers(json);
         }
         fetchUsers();
       }, []);
 
-      paperData.forEach((obj) => {
-        paperIdArr.push(obj.rating); 
-      });
 
       function handleChangePaper(event) {
         setSelectedPaper(event.target.value);
@@ -47,15 +44,8 @@ export default function ViewPaperPage2Conference() {
             </div>
 
             <div class="selectUserRegisterStyle">
-                <p>Papers ratings</p>
-                <select value={selectedPaper} onChange={handleChangePaper}>
-                    <option value="">Papers ratings</option>
-                        {paperIdArr.map((option) => (
-                    <option key={option} value={option}>
-                        {option}
-                    </option>
-                    ))}
-                </select>
+                <p>Papers rating - {paperData.rating}</p>
+                
                 <Button class="buttonRegisterPage" variant="contained" onClick={handleClick}>Return Home</Button>
             </div>
       </>

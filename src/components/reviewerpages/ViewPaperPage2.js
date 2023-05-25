@@ -4,39 +4,73 @@ import { Button, TextField, Icon } from '@mui/material';
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from 'react';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import { idGlobalReviewer } from '../registerPages/ReviewerLoginPage';
+import { paperId } from './ViewPaperPage1';
+
 
 export default function ViewPaperPage2Reviewer() {
 
     const navigate = useNavigate();
     const [selectedPaper, setSelectedPaper] = useState('');
     const [paperData, setPapers] = useState([]);
-    const paperIdArr = [];
-    const [comment, setComment] = useState('')
+    const [paperComment, setPaperComment] = useState([]);
+    const [comment, setComment] = useState()
+
+
+
+
+
+    const handleChange = (e) => {
+      setComment(e.target.value);
+    };
+
+    //Get data to use in the PUT
+    useEffect(() => {
+      async function fetchUsers() {        
+        const response = await fetch(`http://localhost:8080/paper/${paperId+1}`);
+        const json = await response.json();
+        setPapers(json);
+      }
+      fetchUsers();
+    }, []);
 
     const handleClick = () => {
-      navigate('/reviewerhomepage');
+      //Push string to the comment array 
+      console.log(comment)
+      let ar = paperComment
+      ar.push(comment)
+      setPaperComment(prevArray => [...prevArray, comment]);
+      console.log(ar)
+
+      const data = {
+        id: idGlobalReviewer+1,
+        rating: paperData.rating,
+        accepted: paperData.accepted,
+        liked: paperData.liked,
+        comments: ar,
+      }
+
+      console.log(ar)
+      console.log(data)
+      console.log(idGlobalReviewer, 'Global')
+
+      fetch(`http://localhost:8080/updatePaper/${idGlobalReviewer+1}`,{
+        method:"PUT",
+        headers:{"Content-Type":"application/json"},
+        body:JSON.stringify(data)
+      })
+      .then(response => response.json())
+      .then(()=>{
+        navigate('/reviewerhomepage');
+      }) 
     };
+
+    
 
     const handleBackButtonClick = () => {
         navigate('/viewpaperpage1reviewer');
       };
 
-    useEffect(() => {
-        async function fetchUsers() {        
-          const response = await fetch('http://localhost:8080/papers');
-          const json = await response.json();
-          setPapers(json);
-        }
-        fetchUsers();
-      }, []);
-
-      paperData.forEach((obj) => {
-        paperIdArr.push(obj.comment); 
-      });
-
-      function handleChangePaper(event) {
-        setSelectedPaper(event.target.value);
-      }
 
     return (
         <>
@@ -48,15 +82,15 @@ export default function ViewPaperPage2Reviewer() {
 
             <div class="selectUserRegisterStyle">
               <p>View the comments</p>
-                <select value={selectedPaper} onChange={handleChangePaper}>
+                <select value={selectedPaper}>
                     <option value="">Comments</option>
-                        {paperIdArr.map((option) => (
+                        {paperComment.map((option) => (
                     <option key={option} value={option}>
                         {option}
                     </option>
                     ))}
                 </select>
-                <TextField id="password" type="password" placeholder="Your comment" onChange={event => setComment(event.target.value)}/>
+                <TextField id="password" placeholder="Your comment" value={comment} onChange={handleChange}/>
                 <Button class="buttonRegisterPage" variant="contained" onClick={handleClick}>Submit comment</Button>
             </div>
         </>

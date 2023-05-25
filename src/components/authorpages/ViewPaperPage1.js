@@ -5,6 +5,9 @@ import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from 'react';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import { Icon } from '@mui/material';
+import { idGlobal } from '../registerPages/AuthorLoginPage';
+
+export let paperAuthorGlobal = '';
 
 export default function ViewPaperPage1() {
 
@@ -14,6 +17,8 @@ export default function ViewPaperPage1() {
     const paperIdArr = [];
 
     const handleClick = () => {
+      paperAuthorGlobal = selectedPaper;
+      console.log(paperAuthorGlobal, 'pag')
       navigate('/viewpaperpage2');
     };
 
@@ -30,8 +35,13 @@ export default function ViewPaperPage1() {
         fetchUsers();
       }, []);
 
-      paperData.forEach((obj) => {
-        paperIdArr.push(obj.id); 
+      //If the author has a paper, add the paper to the paperIdArr
+      paperData.forEach(paper => {
+        paper.authorIds.forEach(num => {
+          if (num === idGlobal) {
+            paperIdArr.push(paper.id);
+          }
+        });
       });
 
       function handleChangePaper(event) {

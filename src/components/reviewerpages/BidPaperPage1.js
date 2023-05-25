@@ -2,17 +2,47 @@ import { React } from 'react';
 import '../../App.css'
 import { Button } from '@mui/material';
 import { useNavigate } from "react-router-dom";
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import { Icon } from '@mui/material';
+import { idGlobalReviewer } from '../registerPages/ReviewerLoginPage';
+
+
 
 export default function ReviewPaperPage1Reviewer() {
 
     const navigate = useNavigate();
-    const [selectedPaper, setSelectedPaper] = useState('');
+    const [selectedPapers, setSelectedPaper] = useState('');
+    const [paperData, setPapers] = useState([]);
 
-    const handleClick = () => {
-      navigate('/bidpaperpage2');
+    const data = {
+      id: idGlobalReviewer,
+      name: paperData.name,
+      username: paperData.username,
+      password: paperData.password,
+      bids: selectedPapers,
+    }
+
+    useEffect(() => {
+      async function fetchUsers() {        
+        const response = await fetch(`http://localhost:8080/reviewer/${idGlobalReviewer}`);
+        const json = await response.json();
+        setPapers(json);
+      }
+      fetchUsers();
+    }, []);
+
+    const handleClick = () => {  
+      fetch(`http://localhost:8080/updateReviewer/${idGlobalReviewer}`,{
+          method:"PUT",
+          headers:{"Content-Type":"application/json"},
+          body:JSON.stringify(data)
+      })
+      .then(response => response.json())
+      .then(()=>{
+        
+        navigate('/bidpaperpage2');
+      })    
     };
 
     const handleBackButtonClick = () => {
@@ -33,7 +63,7 @@ export default function ReviewPaperPage1Reviewer() {
 
             <div class="selectUserRegisterStyle">
               <p>How many papers would you like to review?</p>
-                <select value={selectedPaper} onChange={handleChangePaper}>
+                <select value={selectedPapers} onChange={handleChangePaper}>
                     <option value="">Select how many</option>
                     <option value="1">1</option>
                     <option value="2">2</option>

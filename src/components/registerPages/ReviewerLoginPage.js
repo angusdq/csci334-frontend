@@ -4,6 +4,9 @@ import { Button, TextField } from '@mui/material';
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from 'react';
 
+export let idGlobalReviewer = '';
+export let paperIdArrayReviewer = [];
+
 export default function ReviewerLoginPage() {
     const navigate = useNavigate();
 
@@ -29,6 +32,9 @@ export default function ReviewerLoginPage() {
       
       userData.forEach(data => {
         if (username === data.username && password === data.password) {
+          idGlobalReviewer = data.id;
+          console.log(idGlobalReviewer, 'idGlobalReviewer')
+          paperIdArrayReviewer = data.paperIds;
           match = true;
         }
       });

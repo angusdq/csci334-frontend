@@ -2,22 +2,30 @@ import { React } from 'react';
 import '../../App.css'
 import { Button, TextField } from '@mui/material';
 import { useNavigate } from "react-router-dom";
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 export default function ConferenceSignUpPage() {
     const navigate = useNavigate();
 
+    const [name, setName] = useState('')
+    const [username, setUsername] = useState('')
+    const [password, setPassword] = useState('')
+
     const handleClick = () => {
-        navigate('/signupconfirmation');
-    }
+        const signUp={name, username, password}
+        console.log(signUp)
+        fetch("http://localhost:8080/createConference",{
+            method:"POST",
+            headers:{"Content-Type":"application/json"},
+            body:JSON.stringify(signUp)
+        }).then(()=>{
+            navigate('/signupconfirmation');
+        })    
+    };
 
     const handleSignUpButtonClick = () => {
         navigate('/signupselectuser');
       };
-
-    const [name, setName] = useState('')
-    const [username, setUsername] = useState('')
-    const [password, setPassword] = useState('')
 
     return(
       <>  

@@ -5,6 +5,9 @@ import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from 'react';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import { Icon } from '@mui/material';
+import { paperIdArrayReviewer } from '../registerPages/ReviewerLoginPage';
+
+export let paperId = '';
 
 export default function ViewPaperPage1Reviewer() {
 
@@ -36,6 +39,7 @@ export default function ViewPaperPage1Reviewer() {
 
       function handleChangePaper(event) {
         setSelectedPaper(event.target.value);
+        paperId = selectedPaper;
       }
     
     return (
@@ -50,7 +54,7 @@ export default function ViewPaperPage1Reviewer() {
               <p>Select the paper to review</p>
                 <select value={selectedPaper} onChange={handleChangePaper}>
                     <option value="">Select a Paper</option>
-                        {paperIdArr.map((option) => (
+                        {paperIdArrayReviewer.map((option) => (
                     <option key={option} value={option}>
                         {option}
                     </option>

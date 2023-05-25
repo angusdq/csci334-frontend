@@ -5,15 +5,21 @@ import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from 'react';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import { Icon } from '@mui/material';
+import { idGlobalReviewer, paperIdArrayReviewer } from '../registerPages/ReviewerLoginPage';
+
+export let selectedPaperId = ''
 
 export default function ReviewPaperPage1Reviewer() {
 
     const navigate = useNavigate();
     const [selectedPaper, setSelectedPaper] = useState('');
     const [paperData, setPapers] = useState([]);
-    const paperIdArr = [];
+    const [reviewerData, setReviewer] = useState([]);
+    const [paperIdArr, setPaperIdArr] = useState([]);
 
     const handleClick = () => {
+      selectedPaperId = selectedPaper;
+      console.log(selectedPaperId)
       navigate('/reviewpaperpage2reviewer');
     };
 
@@ -29,10 +35,6 @@ export default function ReviewPaperPage1Reviewer() {
         }
         fetchUsers();
       }, []);
-
-      paperData.forEach((obj) => {
-        paperIdArr.push(obj.id); 
-      });
 
       function handleChangePaper(event) {
         setSelectedPaper(event.target.value);
@@ -50,7 +52,7 @@ export default function ReviewPaperPage1Reviewer() {
               <p>Select the paper to review</p>
                 <select value={selectedPaper} onChange={handleChangePaper}>
                     <option value="">Select a Paper</option>
-                        {paperIdArr.map((option) => (
+                        {paperIdArrayReviewer.map((option) => (
                     <option key={option} value={option}>
                         {option}
                     </option>

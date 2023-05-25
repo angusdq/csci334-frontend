@@ -4,6 +4,8 @@ import { Button, TextField } from '@mui/material';
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from 'react';
 
+export let idGlobal = '';
+
 export default function SystemAdminLoginPage() {
     const navigate = useNavigate();
 
@@ -29,6 +31,7 @@ export default function SystemAdminLoginPage() {
       
       userData.forEach(data => {
         if (username === data.username && password === data.password) {
+          idGlobal = data.id;
           match = true;
         }
       });

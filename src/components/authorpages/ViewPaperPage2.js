@@ -4,6 +4,10 @@ import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from 'react';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import { Icon, Button } from '@mui/material';
+import { paperAuthorGlobal } from './ViewPaperPage1';
+
+export let paperIdGlobal = '';
+export let paperCommentGlobal = '';
 
 export default function ViewPaperPage2() {
 
@@ -13,6 +17,8 @@ export default function ViewPaperPage2() {
     const paperIdArr = [];
 
     const handleClick = () => {
+      paperCommentGlobal = paperData.comment;
+      console.log(paperCommentGlobal);
       navigate('/viewpaperpage3');
     };
 
@@ -20,21 +26,26 @@ export default function ViewPaperPage2() {
         navigate('/viewpaperpage1');
       };
 
-    useEffect(() => {
+      useEffect(() => {
         async function fetchUsers() {        
-          const response = await fetch('http://localhost:8080/papers');
+          const response = await fetch(`http://localhost:8080/paper/${paperAuthorGlobal}`);
           const json = await response.json();
           setPapers(json);
         }
         fetchUsers();
       }, []);
 
-      paperData.forEach((obj) => {
-        paperIdArr.push(obj.comment); 
-      });
-
+      useEffect(() => {
+        if (paperData.length > 0) {
+          paperData.forEach((obj) => {
+            paperIdArr.push(obj.id);
+          });
+        }
+      }, [paperData]);
+      
       function handleChangePaper(event) {
         setSelectedPaper(event.target.value);
+        paperIdGlobal = selectedPaper;
       }
     
     return (
@@ -47,14 +58,14 @@ export default function ViewPaperPage2() {
 
             <div class="selectUserRegisterStyle">
                 <select value={selectedPaper} onChange={handleChangePaper}>
-                    <option value="">Select a Comment</option>
+                    <option value="">Comment 1</option>
                         {paperIdArr.map((option) => (
                     <option key={option} value={option}>
                         {option}
                     </option>
                     ))}
                 </select>
-                <Button class="buttonRegisterPage" variant="contained" onClick={handleClick}>View Comment</Button>
+                <Button class="buttonRegisterPage" variant="contained" onClick={handleClick}>Review the Comment</Button>
             </div>
       </>
     )

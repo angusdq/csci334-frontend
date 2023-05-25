@@ -2,6 +2,7 @@ import { React, useState } from 'react';
 import '../../App.css'
 import { Button, Drawer } from '@mui/material';
 import { useNavigate } from "react-router-dom";
+import { idGlobal } from '../registerPages/AuthorLoginPage';
 
 export default function AuthorHomePage(){
     const navigate = useNavigate();
@@ -33,6 +34,7 @@ export default function AuthorHomePage(){
     const [isOpen, setIsOpen] = useState(false)
     
     const toggleDrawer = () => {
+        console.log(idGlobal);
         setIsOpen((prevState) => !prevState)
     }
 
